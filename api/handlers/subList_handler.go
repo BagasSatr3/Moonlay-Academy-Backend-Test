@@ -126,8 +126,8 @@ func DeleteSublist(c echo.Context) error {
 		return c.JSON(http.StatusNotFound, "SubList not found!")
 	}
 
-	for _, file := range subList.Files {
-		if err := db.Delete(&file).Error; err != nil {
+	if len(subList.Files) > 0 {
+		if err := db.Unscoped().Model(&subList).Association("Files").Delete(&subList.Files); err != nil {
 			return c.JSON(http.StatusInternalServerError, "Failed to delete associated files")
 		}
 	}
@@ -136,5 +136,5 @@ func DeleteSublist(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, "Failed to delete subList")
 	}
 
-	return c.JSON(http.StatusOK, "List deleted successfully")
+	return c.JSON(http.StatusOK, "Sublist deleted successfully")
 }

@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "425721cd-ef77-44c7-8d57-d79004680f15",
+		"name": "Moonlay Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28762169"
+	},
+	"item": [
+		{
+			"name": "get all lists",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/lists?page=6&limit=10&preloadSublists=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"lists"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "6"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "description",
+							"value": "sample",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "preloadSublists",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/lists/60",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"lists",
+						"60"
+					],
+					"query": [
+						{
+							"key": "preloadFiles",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "preloadSublists",
+							"value": "true",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create list",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "test1maximum 1000 karakter",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test1test1test1test1test1test1",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": "http://localhost:8000/lists"
+			},
+			"response": []
+		},
+		{
+			"name": "update list",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "lorem123",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "ipsum123",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/lists/3"
+			},
+			"response": []
+		},
+		{
+			"name": "delete list",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8000/lists/2"
+			},
+			"response": []
+		},
+		{
+			"name": "get all sublists by list id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/lists/4/sublists?page=1&limit=5&description=sample&title=test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"lists",
+						"4",
+						"sublists"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "description",
+							"value": "sample"
+						},
+						{
+							"key": "title",
+							"value": "test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get sublist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8000/sublists/1"
+			},
+			"response": []
+		},
+		{
+			"name": "create sublist by list id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "sublist33243",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "sublist1sublist1sublist1323",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": [
+								"/D:/bagasfolder/portofolio/CV Bagas Satria Jiwandana.pdf",
+								"/D:/bagasfolder/portofolio/CV Bagas Satria Jiwandana2.pdf"
+							]
+						}
+					]
+				},
+				"url": "http://localhost:8000/lists/2/sublists"
+			},
+			"response": []
+		},
+		{
+			"name": "update sublist",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "12341234",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "1234123412341234",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/sublists/16"
+			},
+			"response": []
+		},
+		{
+			"name": "delete sublist",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8000/sublists/16"
+			},
+			"response": []
+		}
+	]
+}

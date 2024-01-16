@@ -108,6 +108,7 @@ func UpdateList(c echo.Context) error {
 
 func DeleteList(c echo.Context) error {
 	db := config.GetDB()
+	db = db.Debug()
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "Invalid list ID")
@@ -118,19 +119,19 @@ func DeleteList(c echo.Context) error {
 		return c.JSON(http.StatusNotFound, "List not found!")
 	}
 
-	for _, sublist := range list.Sublists {
-		if err := db.Delete(&sublist).Error; err != nil {
-			return c.JSON(http.StatusInternalServerError, "Failed to delete associated sublists")
-		}
-	}
-
-	for _, file := range list.Files {
-		if err := db.Delete(&file).Error; err != nil {
+	if len(list.Files) > 0 {
+		if err := db.Unscoped().Model(&list).Association("Files").Delete(&list.Files); err != nil {
 			return c.JSON(http.StatusInternalServerError, "Failed to delete associated files")
 		}
 	}
 
-	if err := db.Delete(&list).Error; err != nil {
+	if len(list.Sublists) > 0 {
+		if err := db.Unscoped().Model(&list).Association("Sublists").Delete(&list.Sublists); err != nil {
+			return c.JSON(http.StatusInternalServerError, "Failed to delete associated sublists")
+		}
+	}
+
+	if err := db.Unscoped().Delete(&list).Error; err != nil {
 		return c.JSON(http.StatusInternalServerError, "Failed to delete list")
 	}
 

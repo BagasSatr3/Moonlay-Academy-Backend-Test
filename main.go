@@ -10,9 +10,11 @@ import (
 
 func main() {
 	e := echo.New()
+
 	// Initialize Database
-	config.InitDB()
+	config.InitDB(config.PgConfig)
 	defer config.CloseDB()
+
 	// Run Migrations
 	migrations.RunMigrations()
 

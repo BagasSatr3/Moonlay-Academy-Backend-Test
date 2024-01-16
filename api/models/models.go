@@ -29,16 +29,16 @@ func alphaNumWithSpace(fl validator.FieldLevel) bool {
 }
 
 type List struct {
-	ID          uint   `gorm:"primaryKey"`
-	Title       string `gorm:"type:varchar(100);not null" json:"title" form:"title" validate:"required,max=100,alphanumwithspace"`
-	Description string `gorm:"type:text;not null" json:"description" form:"description" validate:"required,max=1000"`
-	Files       []File `gorm:"foreignKey:ListID"`
-	Sublists    []Sublist
+	ID          uint      `gorm:"primaryKey"`
+	Title       string    `gorm:"type:varchar(100);not null" json:"title" form:"title" validate:"required,max=100,alphanumwithspace"`
+	Description string    `gorm:"type:text;not null" json:"description" form:"description" validate:"required,max=1000"`
+	Files       []File    `gorm:"foreignKey:ListID"`
+	Sublists    []Sublist `gorm:"foreignKey:ListID;onDelete:CASCADE"`
 }
 
 type Sublist struct {
 	ID          uint   `gorm:"primaryKey"`
-	ListID      uint   `gorm:"not null"`
+	ListID      uint   `gorm:"index"`
 	Title       string `gorm:"type:varchar(100);not null" json:"title" form:"title" validate:"required,max=100,alphanumwithspace"`
 	Description string `gorm:"type:text;not null" json:"description" form:"description" validate:"required,max=1000"`
 	Files       []File `gorm:"foreignKey:SublistID"`
@@ -51,17 +51,14 @@ type File struct {
 	FileName  string `gorm:"type:varchar(255);not null" json:"file_name" form:"file" validate:"omitempty,fileExtension=txt|pdf"`
 }
 
-// Validate validates the List model
 func (l *List) Validate() error {
 	return validate.Struct(l)
 }
 
-// Validate validates the Sublist model
 func (s *Sublist) Validate() error {
 	return validate.Struct(s)
 }
 
-// Validate validates the File model
 func (f *File) Validate() error {
 	return validate.Struct(f)
 }
