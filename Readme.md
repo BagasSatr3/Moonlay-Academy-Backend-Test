@@ -90,4 +90,4 @@ The API provides the following endpoints:
 
 ### API Specification
 
-The API specification is available in the [Postman Collection](link-to-postman-collection)
+The API specification is available in the [Postman Collection](https://github.com/BagasSatr3/Moonlay-Academy-Backend-Test/blob/main/Moonlay%20Backend.postman_collection.json)
