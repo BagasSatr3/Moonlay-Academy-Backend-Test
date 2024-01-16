@@ -1,4 +1,3 @@
-````markdown
 # Moonlay Todo List API
 
 This API provides endpoints to manage todo lists and sublists. It is built using the Echo framework and GORM for database interactions.
@@ -20,7 +19,6 @@ Follow these instructions to set up and run the Moonlay Todo List API on your lo
    ```bash
    git clone https://github.com/your-username/moonlay-todo-list-api.git
    ```
-````
 
 2. Change into the project directory:
 
